@@ -5,17 +5,17 @@ const MemoryDataStore = require('@slack/client').MemoryDataStore
 const RTM_EVENTS = require('@slack/client').RTM_EVENTS
 const CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS
 
-const token = ''
+const token = process.env.SLACK_TOKEN
 
 let slack = new RtmClient(token, {
-  logLevel: 'debug', 
+  logLevel: 'error', 
   dataStore: new MemoryDataStore(),
   autoReconnect: true,
   autoMark: true
 })
 
 slack.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, () => {
-  let user = slac.dataStore.getUserById(slac.activeUserId)
+  let user = slack.dataStore.getUserById(slack.activeUserId)
   let team = slack.dataStore.getTeamById(slack.activeTeamId)
 
   console.log(`Connected to ${team.name} as ${user.name}`)
