@@ -75,6 +75,11 @@ slack.on(RTM_EVENTS.MESSAGE, (message) => {
       slack.sendMessage(`Hello to you too, ${user.name}!`, channel.id)
     }
     if(/uptime/g.test(msg)) {
+      debugger
+      if (!user.is_admin) {
+        slack.sendMessage(`Sorry ${user.name}, but that functionality is only for admins.`, channel.id)
+          return
+      }
       let dm = slack.dataStore.getDMByName(user.name)
       let uptime = process.uptime()
       let minutes = parseInt(uptime / 60, 10)
