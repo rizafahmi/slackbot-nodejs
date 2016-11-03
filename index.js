@@ -48,6 +48,8 @@ slack.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, () => {
     }).join(', ')
     console.log(`Members of '${group.name}' channel: ${memberNames}`)
 
+    slack.sendMessage(`Hello ${memberNames}!`, group.id)
+
   })
 
 
